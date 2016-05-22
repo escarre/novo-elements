@@ -90,7 +90,7 @@ export class PickerDemo {
         }];
         this.static = { options: states };
         this.formatted = {
-            //field: 'id',
+            field: 'id',
             format: '$firstName $lastName',
             options: collaborators
         };
