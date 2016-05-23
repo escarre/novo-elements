@@ -92,15 +92,24 @@ export class ChipsDemo {
         }];
         this.static = { options: states };
         this.formatted = {
-            //field: 'id',
+            field: 'id',
             format: '$firstName $lastName',
             options: collaborators
         };
+        this.avalue = ['USA', 'CA'];
         this.async = {
             options: () => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
                         resolve(abbrieviated);
+                    }, 300);
+                });
+            },
+            getLabel: (val) => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        let obj = abbrieviated.find(item => item.value === val);
+                        resolve(obj.label);
                     }, 300);
                 });
             }

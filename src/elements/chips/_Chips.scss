@@ -1,5 +1,4 @@
-chips,
-entity-chips {
+novo-chips {
     width: 100%;
     display: flex;
     align-items: center;
@@ -19,7 +18,7 @@ entity-chips {
             color: $positive;
         }
     }
-    chip {
+    novo-chip {
         display: flex;
         flex-grow: inherit;
         align-items: center;
@@ -73,130 +72,10 @@ entity-chips {
             }
         }
     }
-}
 
-chips,
-entity-chips {
     & + i {
         position: absolute;
         right: 0;
         bottom: 7px;
     }
-}
-
-entity-chips {
-    chip {
-        span {
-            color: $positive;
-            &.contact {
-                i {
-                    color: $contact;
-                }
-            }
-            &.company {
-                i {
-                    color: $company;
-                }
-            }
-            &.candidate {
-                i {
-                    color: $candidate;
-                }
-            }
-            &.job {
-                i {
-                    color: $job;
-                }
-            }
-            &.placement {
-                i {
-                    color: $placement;
-                }
-            }
-            &.opportunity {
-                i {
-                    color: $opportunity;
-                }
-            }
-            &.lead {
-                i {
-                    color: $lead;
-                }
-            }
-        }
-    }
-
-    picker-results {
-        position: absolute;
-        color: black;
-        width: 90%;
-        max-width: none;
-
-        bh-list {
-            max-height: 600px;
-            overflow: auto;
-
-            bh-list-item {
-                flex: 0 0;
-                transition: background-color 250ms;
-                & > div {
-                    width: 100%;
-                }
-
-                &.active {
-                    background-color: lighten($positive, 35%);
-                }
-
-                &:hover {
-                    background-color: lighten($positive, 39%);
-                }
-
-                item-content {
-                    flex-flow: row wrap;
-                    & > * {
-                        flex: 0 0 33%;
-                        white-space: nowrap;
-                    }
-                }
-            }
-        }
-
-        .no-recents,
-        .null-results,
-        .error-results {
-            text-align: center;
-            padding: 1em 0 4em;
-            > i {
-                font-size: 3em;
-                margin: .5em;
-                color: rgba(0, 0, 0, .3);
-            }
-
-            > h4,
-            > p {
-                margin: 0;
-                max-width: none;
-                padding: 0;
-            }
-            > h4 {
-                font-weight: 500;
-            }
-            > p {
-
-            }
-        }
-
-        section {
-            box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.25);
-            z-index: 9;
-            position: absolute;
-            width: 100%;
-            background-color: white;
-            color: black;
-        }
-    }
-}
-
-entity-chip-results {
-    max-width: none !important;
 }

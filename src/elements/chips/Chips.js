@@ -5,7 +5,7 @@ import { KeyCodes } from './../../utils/key-codes/KeyCodes';
 import { NOVO_PICKER_ELEMENTS } from '../picker/Picker';
 
 @Component({
-    selector: 'chip',
+    selector: 'novo-chip',
     directives: [COMMON_DIRECTIVES],
     inputs: [
         'type'
@@ -47,19 +47,19 @@ export class Chip {
 }
 
 @Component({
-    selector: 'chips',
+    selector: 'novo-chips',
     inputs: ['source', 'placeholder', 'value', 'type'],
     outputs: ['changed'],
     directives: [COMMON_DIRECTIVES, NOVO_PICKER_ELEMENTS, Chip, NgModel],
     template: `
-        <chip
+        <novo-chip
             *ngFor="let item of items"
             [type]="type"
             [class.selected]="item == selected"
             (remove)="remove($event, item)"
             (select)="select($event, item)">
             {{ item.label }}
-        </chip>
+        </novo-chip>
         <div class="chip-input-container">
             <novo-picker
                 [config]="source"
@@ -135,7 +135,7 @@ export class Chips extends OutsideClick {
         }
         this.items.splice(this.items.indexOf(item), 1);
         this.deselectAll();
-        this.value = this.items;
+        this.value = this.items.map(i => i.value);
     }
 
     onKeyDown(event) {
@@ -187,6 +187,13 @@ export class Chips extends OutsideClick {
         this._value = value;
         if (Array.isArray(value)) {
             this.items = value.map(v => ({ value: v, label: v }));
+        }
+        if (this.config && this.config.getLabel) {
+            for (let item of this.items) {
+                this.config.getLabel(item.value).then(label => {
+                    item.label = label;
+                });
+            }
         }
     }
     //Set touched on blur

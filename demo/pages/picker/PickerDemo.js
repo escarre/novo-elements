@@ -95,11 +95,20 @@ export class PickerDemo {
             options: collaborators
         };
         this.value = 'Alabama';
+        this.avalue = 'USA';
         this.async = {
             options: () => {
                 return new Promise((resolve) => {
                     setTimeout(() => {
                         resolve(abbrieviated);
+                    }, 300);
+                });
+            },
+            getLabel: (val) => {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        let obj = abbrieviated.find(item => item.value === val);
+                        resolve(obj.label);
                     }, 300);
                 });
             }

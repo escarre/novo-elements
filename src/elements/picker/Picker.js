@@ -28,7 +28,15 @@ import 'rxjs/Rx'; //eslint-disable-line
             (focus)="onFocus($event)"
             (blur)="onTouched($event)"
             autocomplete="off" />
-    `
+    `,
+    host: {
+        '[class.ng-untouched]': 'model.control?.untouched == true',
+        '[class.ng-touched]': 'model.control?.touched == true',
+        '[class.ng-pristine]': 'model.control?.pristine == true',
+        '[class.ng-dirty]': 'model.control?.dirty == true',
+        '[class.ng-valid]': 'model.control?.valid == true',
+        '[class.ng-invalid]': 'model.control?.valid == false'
+    }
 
 })
 export class Picker extends OutsideClick {
@@ -195,7 +203,7 @@ export class Picker extends OutsideClick {
     }
     //From ControlValueAccessor interface
     writeValue(value) {
-        if (typeof value === 'string') {
+        if (typeof value === 'object') {
             this.term = value;
             this._value = value;
         } else {
@@ -204,6 +212,11 @@ export class Picker extends OutsideClick {
         }
         if (!value) {
             this._onChangeCallback();
+        }
+        if (this.config && this.config.getLabel) {
+            this.config.getLabel(value).then(label => {
+                this.term = label;
+            });
         }
     }
     //From ControlValueAccessor interface
